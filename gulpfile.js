@@ -7,14 +7,16 @@ const runSequence = require('run-sequence')
 const sass = require('gulp-sass')
 const sourcemaps = require('gulp-sourcemaps')
 
-const distributionPath = './dist'
-const sassRelativePath = '/stylez'
-const sourcePath = './src'
+// const distributionPath = './dist'
+const distributionPath = '.'
+const sassRelativePath = '/styles'
+// const sourcePath = './src'
+const sourcePath = '.'
 
 const allDistributionPath = `${distributionPath}/**/*`
 const allSassPath = `${sourcePath}${sassRelativePath}/**/*.scss`
 const allSourcePath = `${sourcePath}/**/*`
-const sassEntryPath = `${sourcePath}${sassRelativePath}/main.scss`
+const sassEntryPath = `${sourcePath}${sassRelativePath}/style.scss`
 const staticPath = [allSourcePath, `!${allSassPath}`]
 
 // CLEANERS
@@ -23,12 +25,14 @@ gulp.task('clean:all', () => del(allDistributionPath))
 
 gulp.task('clean:temp', () => del(`${distributionPath}${sassRelativePath}`))
 
+gulp.task('clean:css', () => del(`${distributionPath}/css`))
+
 // COPIERS
 
-gulp.task('static:copy', () => (
-  gulp.src(allSourcePath)
-    .pipe(gulp.dest(distributionPath))
-))
+// gulp.task('static:copy', () => (
+//   gulp.src(allSourcePath)
+//     .pipe(gulp.dest(distributionPath))
+// ))
 
 // COMPILERS
 
@@ -44,30 +48,26 @@ gulp.task('sass:compile', () => (
 
 // WATCHERS
 
-gulp.task('watch', () => (
-  runSequence(
-    'clean:all',
-    'build',
-    [
-      'static:watch',
-      'sass:watch',
-      'livereload:watch',
-      'connect'
-    ]
-  )
-))
-
-gulp.task('livereload:watch', () => (
-  gulp.watch(allDistributionPath, ['livereload'])
-))
+// gulp.task('watch', () => (
+//   runSequence(
+//     'clean:all',
+//     'build',
+//     [
+//       'static:watch',
+//       'sass:watch',
+//       'livereload:watch',
+//       'connect'
+//     ]
+//   )
+// ))
 
 gulp.task('sass:watch', () => (
   gulp.watch(allSassPath, ['sass:compile'])
 ))
 
-gulp.task('static:watch', () => (
-   gulp.watch(staticPath, ['build'])
-))
+// gulp.task('static:watch', () => (
+//    gulp.watch(staticPath, ['build'])
+// ))
 
 // SERVERS
 
@@ -83,12 +83,18 @@ gulp.task('livereload', () => (
 
 // BUILDERS
 
-gulp.task('build', ['sass:compile', 'static:copy'])
-
-gulp.task('dist', () => (
-  runSequence(
-    'clean:all',
-    'build',
-    'clean:temp'
-  )
+// gulp.task('build', ['sass:compile', 'static:copy'])
+gulp.task('build', () => (
+    runSequence(
+      'clean:css',
+      'sass:compile'
+    )
 ))
+
+// gulp.task('dist', () => (
+//   runSequence(
+//     'clean:all',
+//     'build',
+//     'clean:temp'
+//   )
+// ))
