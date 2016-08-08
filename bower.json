@@ -1,0 +1,22 @@
+{
+  "name": "benwilburn.github.io",
+  "homepage": "benwilburn.com",
+  "authors": [
+    "Ben Wilburn"
+  ],
+  "description": "Personal Site",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "^0.97.7",
+    "angular": "^1.5.8"
+  }
+}
