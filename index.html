@@ -11,32 +11,12 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<div class="intro">
-
-	</div>
-	<div>
-		<h3 class='about'>About Me</h3>
-		<p>
-		</p>
+	<div ng-view>
+		<div ng-app='personal-site'>
+			<section ng-controller='website-ctrl'>
+				<h1>{{app_name}}</h1>
+			</section>
 		</div>
-	</div>
-	<div>
-		<h3 class='portfolio'>Portfolio</h3>
-		<ul>
-			<li><a href="http://benwilburn.github.io/Independence-Day-Capstone/">Independence Day Capstone!</a></li>
-			<li><a href="http://nss-day-cohort-13.github.io/spa-group-chatty-bach/">Vanilla JS Chatty Messenger</a></li>
-			<li><a href="http://benwilburn.github.io/spa-group-chatty-bach/">jQuery Chatty Messenger</a></li>
-			<li><a href="http://nss-day-cohort-13.github.io/static-web-team-two-the-chicago-bulls/">Buisness Website Group Project</a></li>
-			<li><a href="http://nss-day-cohort-13.github.io/">Pinterest Clone Group Project</a></li>
-		</ul>
-	</div>
-	<div class="links">
-		<a href="https://www.linkedin.com/in/benjaminwilburn">
-			<div>LinkedIn</div>
-		</a>
-		<a href="#">
-			<div>Github</div>
-		</a>
 	</div>
 
 	<!-- SCRIPTS -->
