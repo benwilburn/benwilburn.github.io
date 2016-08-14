@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BenWilburnIO</title>
+	<title>benwilburn.com</title>
 	<!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <link rel="stylesheet" href="lib/materialize/dist/css/materialize.min.css">
 	<!-- My CSS -->
 	<!-- <link rel="stylesheet" href="style.scss"> -->
 	<link rel="stylesheet" href="css/style.css">
@@ -13,19 +13,94 @@
 <body>
 	<div ng-view>
 		<div ng-app='personal-site'>
-			<section ng-controller='website-ctrl'>
-				<h1>{{app_name}}</h1>
+		<nav>
+			<div class='logo'>
+			</div>
+			<div class='nav-buttons'>
+			</div>
+		</nav>
+			<section>
+				<div class='intro-image'>
+					<img src=''>
+				</div>
+				<div class='intro-text'>
+					<div>
+						<p>Welcome! I'm Ben.</p>
+						<p>Junior Software Developer born and raised in Nashville, Tn.</p>
+					</div>
+					<div>
+						<p>I aspire to create practical applications that enhance everyday life</p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div class='aboutme'>
+					<p>I spent the first leg of my career as a Strength & Conditioning Coach, where I taught middle school-college age athletes how to use their body to gain a competitive advantadge on the competition. In addition hard work and the physical aspects of the human body, I also taught my athletes how to be mentally tough, respectful, disciplined and patient. Every principle I taught my athletes is what I live by everyday. As a Strength & Conditioning Coach, my aim was to utilize my knowledge of human movement to create customized programs for each of my athletes.</p>
+					<p>In 2016, I decided to pursue a passion I've had since my freshman year of high school, technology. What is a better way to work with technology than to write the software behind it? I couldn't think of one. So, I enrolled in Nashville Software School, where I was surrounded by a group of like-minded people. Over the last six months, I've been expanding my skillset as a full-stack developer, learning from my mistakes, and exploring new technologies! I dream of being able to develop applications that let people interact with the world around them wether they are on vacation, at work or binge watching their favorite tv show. I believe technology has the power to connect people with whatever they are searching for and I want to be the one to help them find it. Technology is the future! How far it takes us is up to our creativity.</p>
+					<p>I excel in fast-paced, collaborative environments where I can work with teams who strive to construct creative solutions for practical technologies. When I'm not experimenting with new ways to implement code for applications or personal projects, you can usually find me at the gym, or enjoying outside activites(probably basketball). </p>
+				</div>
+			</section>
+			<!-- <section class='marquee' ng-controller='technologiesCtrl'> -->
+			<section>
+				<!-- <span ng-repeat='item in imageArray'>
+					<img class='tech-logo' src='{{item}}'>
+				</span> -->
+				<div class='imgs marquee'>
+					<ul>
+						<li>
+							<img src='assets/html.png'>
+							<img src='assets/css.png'>
+							<img src='assets/javascript.jpg'>
+							<img src='assets/jquery.png'>
+							<img src='assets/angularjs.png'>
+							<img src='assets/json.png'>
+							<img src='assets/python.png'>
+							<img src='assets/django.png'>
+							<img src='assets/sql.png'>
+						</li>
+						<li>
+							<img src='assets/github.png'>
+							<img src='assets/git.png'>
+							<img src='assets/phaser.png'>
+							<img src='assets/bootstrap.png'>
+							<img src='assets/materialize.png'>
+							<img src='assets/sass.png'>
+							<img src='assets/gulp.png'>
+							<img src='assets/bower.png'>
+							<img src='assets/npm.png'>
+							<img src='assets/firebase.png'>
+						</li>
+						<li>
+							<img src='assets/html.png'>
+							<img src='assets/css.png'>
+							<img src='assets/javascript.jpg'>
+							<img src='assets/jquery.png'>
+							<img src='assets/angularjs.png'>
+							<img src='assets/json.png'>
+							<img src='assets/python.png'>
+							<img src='assets/django.png'>
+							<img src='assets/sql.png'>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section ng-controller='projectsCtrl'>
+				<div class='projects'>
+					<h3>Featured Projects</h3>
+					<p>In Development!</p>
+				</div>
 			</section>
 		</div>
 	</div>
 
 	<!-- SCRIPTS -->
 	<script src="lib/jquery/dist/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+	<script src="lib/materialize/dist/js/materialize.min.js"></script>
 	<script src="lib/angular/angular.min.js"></script>
 	<script src='main.js'></script>
-	<script src="main_factory.js"></script>
-	<script src="main_controller.js"></script>
+	<script src="website-factory.js"></script>
+	<script src="projects-controller.js"></script>
+	<script src='technologies-controller.js'></script>
 
 </body>
 </html>

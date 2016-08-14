@@ -1,5 +1,5 @@
 angular.module('personal-site')
-  .factory('MainFactory', function($http) {
+  .factory('WebsiteFactory', function($http) {
     return {
       getLinks: function () {
         return $http.get('websites.json').then((res) => {

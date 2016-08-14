@@ -31,5 +31,27 @@
         "logo": ""
       }
     }
+  },
+  "technology_images": {
+    "html": {"image": "assets/html.png"},
+    "css": {"image": "assets/css.png"},
+    "javascript": {"image": "assets/javascript.jpg"},
+    "jquery": {"image": "assets/jquery.png"},
+    "angular": {"image": "assets/angularjs.png"},
+    "python": {"image": "assets/python.png"},
+    "django": {"image": "assets/django.png"},
+    "json": {"image": "assets/json.png"},
+    "sql": {"image": "assets/sql.png"},
+    "github": {"image": "assets/github.png"},
+    "git": {"image": "assets/git.png"},
+    "phaser": {"image": "assets/phaser.png"},
+    "bootstrap": {"image": "assets/bootstrap.png"},
+    "materialize": {"image": "assets/materialize.png"},
+    "sass": {"image": "assets/sass.png"},
+    "gulp": {"image": "assets/gulp.png"},
+    "bower": {"image": "assets/bower.png"},
+    "npm": {"image": "assets/npm.png"},
+    "djangoRest": {"image": "assets/django-rest.png"},
+    "firebase": {"image": "assets/firebase.png"}
   }
 }
