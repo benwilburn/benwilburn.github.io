@@ -3,22 +3,32 @@
     "deployed_sites": {
       "vanilla_js_chatty": {
         "link":"http://nss-day-cohort-13.github.io/spa-group-chatty-bach/",
-        "screenshot": ""
+        "screenshot": "",
+        "description": "",
+        "github-link": ""
       },
       "jquery_chatty": {
         "link": "http://benwilburn.github.io/spa-group-chatty-bach/",
-        "screenshot": ""
+        "screenshot": "",
+        "description": "",
+        "github-link": ""
       },
       "mock_business_website": {"link": "http://nss-day-cohort-13.github.io/static-web-team-two-the-chicago-bulls/",
-        "screenshot": ""
+        "screenshot": "",
+        "description": "",
+        "github-link": ""
       },
       "pinterest_clone": {
         "link": "http://benwilburn.com/group-pinterest-city-sportsters/",
-        "screenshot": ""
+        "screenshot": "",
+        "description": "",
+        "github-link": ""
       },
       "indpendence_day_capstone": {
         "link": "http://benwilburn.github.io/Independence-Day-Capstone/",
-        "screenshot": ""
+        "screenshot": "",
+        "description": "",
+        "github-link": ""
       }
     },
     "contact_links": {

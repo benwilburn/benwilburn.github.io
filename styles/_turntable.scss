@@ -1,0 +1,129 @@
+// MIXINS USED
+
+@mixin center-vertically($pseudo-el: 'before') {
+    position: relative;
+
+    &:#{$pseudo-el} {
+        content: '';
+        position: relative;
+        height: 100%;
+        width: 0;
+    }
+
+    &:#{$pseudo-el},
+    > * {
+        vertical-align: middle;
+        display: inline-block;
+    }
+}
+
+@mixin justify($vertical-align: top, $childs: '*') {
+    text-align: justify;
+    text-justify: distribute-all-lines;
+    line-height: 0;
+
+    // clear inline-block spacing
+    letter-spacing: -0.31em;
+
+    &:after {
+        content: '.';
+        display: inline-block;
+        height: 0!important;
+        width: 100%;
+        overflow: hidden!important;
+        visibility: hidden;
+
+        font-size: 0;
+        word-spacing: 100%;
+    }
+
+    > #{unquote($childs)} {
+        display: inline-block;
+        vertical-align: $vertical-align;
+        text-align: left;
+        line-height: 1;
+
+        // reset `inline-block spacing` trick
+        letter-spacing: 0;
+    }
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+
+@mixin animation($args...) {
+  -webkit-animation: $args;
+  -moz-animation: $args;
+  -o-animation: $args;
+  animation: $args;
+}
+
+@mixin transform($args...) {
+  -webkit-transform: $args;
+  -moz-transform: $args;
+  -o-transform: $args;
+  transform: $args;
+}
+
+
+
+// MARQUEE
+
+@include keyframes(loop) {
+    0%   {
+        @include transform( translateX(0) );
+    }
+    100% {
+        @include transform( translateX(-(33.3% * 2)));
+    }
+}
+
+
+$height: 110px;
+
+.marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    > ul {
+       list-style: none;
+       position: relative;
+       z-index: 1;
+       top: 0;
+       left: 0;
+       width: 300%!important;
+       height: $height;
+       @include transform(translate3d(0, 0, 0));
+       @include animation(loop 35s linear infinite);
+    }
+
+    > ul > li {
+        @include center-vertically();
+        @include justify(middle);
+
+        float: left;
+        width: 33.333333%;
+        height: $height;
+        overflow: hidden;
+
+        img {
+          margin: 20px 1.6%;
+          max-height: 60%;
+          max-width: 60%;
+        }
+    }
+}
