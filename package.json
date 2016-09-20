@@ -1,27 +1,20 @@
 {
   "name": "benwilburn.github.io",
+  "title": "New Age",
   "version": "1.0.0",
-  "description": "",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/benwilburn/benwilburn.github.io.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/benwilburn/benwilburn.github.io/issues"
-  },
-  "homepage": "https://github.com/benwilburn/benwilburn.github.io#readme",
-  "dependencies": {
-    "del": "^2.2.1",
+  "homepage": "benwilburn.com",
+  "author": "BenWilburn",
+  "license": "MIT",
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "browser-sync": "^2.13.0",
+    "font-awesome": "^4.6.3",
     "gulp": "^3.9.1",
-    "gulp-connect": "^5.0.0",
-    "gulp-sass": "^2.3.2",
-    "gulp-sourcemaps": "^1.6.0",
-    "run-sequence": "^1.2.2"
+    "gulp-clean-css": "^2.0.10",
+    "gulp-header": "^1.8.7",
+    "gulp-less": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.4",
+    "jquery": "^1.11.3"
   }
 }

@@ -1,100 +1,92 @@
-'use strict'
+var gulp = require('gulp');
+var less = require('gulp-less');
+var browserSync = require('browser-sync').create();
+var header = require('gulp-header');
+var cleanCSS = require('gulp-clean-css');
+var rename = require("gulp-rename");
+var uglify = require('gulp-uglify');
+var pkg = require('./package.json');
 
-const connect = require('gulp-connect');
-const del = require('del')
-const gulp = require('gulp')
-const runSequence = require('run-sequence')
-const sass = require('gulp-sass')
-const sourcemaps = require('gulp-sourcemaps')
+// Set the banner content
+var banner = ['/*!\n',
+    ' * Start Bootstrap - <%= pkg.title %> v<%= pkg.version %> (<%= pkg.homepage %>)\n',
+    ' * Copyright 2013-' + (new Date()).getFullYear(), ' <%= pkg.author %>\n',
+    ' * Licensed under <%= pkg.license.type %> (<%= pkg.license.url %>)\n',
+    ' */\n',
+    ''
+].join('');
 
-// const distributionPath = './dist'
-const distributionPath = '.'
-const sassRelativePath = '/styles'
-// const sourcePath = './src'
-const sourcePath = '.'
+// Compile LESS files from /less into /css
+gulp.task('less', function() {
+    return gulp.src('less/freelancer.less')
+        .pipe(less())
+        .pipe(header(banner, { pkg: pkg }))
+        .pipe(gulp.dest('css'))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
+});
 
-const allDistributionPath = `${distributionPath}/**/*`
-const allSassPath = `${sourcePath}${sassRelativePath}/**/*.scss`
-const allSourcePath = `${sourcePath}/**/*`
-const sassEntryPath = `${sourcePath}${sassRelativePath}/style.scss`
-const staticPath = [allSourcePath, `!${allSassPath}`]
+// Minify compiled CSS
+gulp.task('minify-css', ['less'], function() {
+    return gulp.src('css/freelancer.css')
+        .pipe(cleanCSS({ compatibility: 'ie8' }))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest('css'))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
+});
 
-// CLEANERS
+// Minify JS
+gulp.task('minify-js', function() {
+    return gulp.src('js/freelancer.js')
+        .pipe(uglify())
+        .pipe(header(banner, { pkg: pkg }))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest('js'))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
+});
 
-gulp.task('clean:all', () => del(allDistributionPath))
+// Copy vendor libraries from /node_modules into /vendor
+gulp.task('copy', function() {
+    gulp.src(['node_modules/bootstrap/dist/**/*', '!**/npm.js', '!**/bootstrap-theme.*', '!**/*.map'])
+        .pipe(gulp.dest('vendor/bootstrap'))
 
-gulp.task('clean:temp', () => del(`${distributionPath}${sassRelativePath}`))
+    gulp.src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery/dist/jquery.min.js'])
+        .pipe(gulp.dest('vendor/jquery'))
 
-gulp.task('clean:css', () => del(`${distributionPath}/css`))
+    gulp.src([
+            'node_modules/font-awesome/**',
+            '!node_modules/font-awesome/**/*.map',
+            '!node_modules/font-awesome/.npmignore',
+            '!node_modules/font-awesome/*.txt',
+            '!node_modules/font-awesome/*.md',
+            '!node_modules/font-awesome/*.json'
+        ])
+        .pipe(gulp.dest('vendor/font-awesome'))
+})
 
-// COPIERS
+// Run everything
+gulp.task('default', ['less', 'minify-css', 'minify-js', 'copy']);
 
-// gulp.task('static:copy', () => (
-//   gulp.src(allSourcePath)
-//     .pipe(gulp.dest(distributionPath))
-// ))
+// Configure the browserSync task
+gulp.task('browserSync', function() {
+    browserSync.init({
+        server: {
+            baseDir: ''
+        },
+    })
+})
 
-// COMPILERS
-
-gulp.task('sass:compile', () => (
-  gulp.src(sassEntryPath)
-    .pipe(sourcemaps.init())
-    .pipe(sass()
-      .on('error', sass.logError)
-    )
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest(`${distributionPath}/css`))
-))
-
-// WATCHERS
-
-// gulp.task('watch', () => (
-//   runSequence(
-//     'clean:all',
-//     'build',
-//     [
-//       'static:watch',
-//       'sass:watch',
-//       'livereload:watch',
-//       'connect'
-//     ]
-//   )
-// ))
-
-gulp.task('sass:watch', () => (
-  gulp.watch(allSassPath, ['sass:compile'])
-))
-
-// gulp.task('static:watch', () => (
-//    gulp.watch(staticPath, ['build'])
-// ))
-
-// SERVERS
-
-gulp.task('connect', () => connect.server({
-  root: distributionPath,
-  livereload: true
-}))
-
-gulp.task('livereload', () => (
-  gulp.src(allDistributionPath)
-    .pipe(connect.reload())
-))
-
-// BUILDERS
-
-// gulp.task('build', ['sass:compile', 'static:copy'])
-gulp.task('build', () => (
-    runSequence(
-      'clean:css',
-      'sass:compile'
-    )
-))
-
-// gulp.task('dist', () => (
-//   runSequence(
-//     'clean:all',
-//     'build',
-//     'clean:temp'
-//   )
-// ))
+// Dev task with browserSync
+gulp.task('dev', ['browserSync', 'less', 'minify-css', 'minify-js'], function() {
+    gulp.watch('less/*.less', ['less']);
+    gulp.watch('css/*.css', ['minify-css']);
+    gulp.watch('js/*.js', ['minify-js']);
+    // Reloads the browser whenever HTML or JS files change
+    gulp.watch('*.html', browserSync.reload);
+    gulp.watch('js/**/*.js', browserSync.reload);
+});
